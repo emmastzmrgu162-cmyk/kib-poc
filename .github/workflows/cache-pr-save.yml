@@ -1,0 +1,14 @@
+name: PR Cache Poison Test
+on: pull_request
+jobs:
+  poison:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Poison cache content
+        run: |
+          mkdir -p /tmp/kibpoison
+          echo "POISONED-BY-PR-$(date +%s)" > /tmp/kibpoison/payload.txt
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/kibpoison
+          key: kib-poison-pr-fixed-key

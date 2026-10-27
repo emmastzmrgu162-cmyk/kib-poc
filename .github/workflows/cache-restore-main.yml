@@ -1,0 +1,13 @@
+name: Main Restore Test
+on: workflow_dispatch
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/kibpoison
+          key: kib-poison-pr-fixed-key
+      - run: |
+          ls -la /tmp/kibpoison/ || echo nodir
+          [ -f /tmp/kibpoison/payload.txt ] && echo '*** POISON RESTORED ON MAIN: ' $(cat /tmp/kibpoison/payload.txt) || echo 'no poison on main'

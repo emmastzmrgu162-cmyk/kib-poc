@@ -1,0 +1,20 @@
+name: Cache Save Experiment
+on: workflow_dispatch
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create marker
+        run: |
+          mkdir -p /tmp/kibcache
+          echo "cross-repo-secret-marker-12345" > /tmp/kibcache/marker.txt
+      - name: Save cache with unique key
+        uses: actions/cache@v4
+        with:
+          path: /tmp/kibcache
+          key: kib-crossrepo-exp1-${{ github.run_id }}
+      - name: Also save with fixed key
+        uses: actions/cache@v4
+        with:
+          path: /tmp/kibcache
+          key: kib-crossrepo-exp1-fixed
